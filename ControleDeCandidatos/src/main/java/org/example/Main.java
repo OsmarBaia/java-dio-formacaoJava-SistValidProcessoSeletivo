@@ -1,14 +1,36 @@
 package org.example;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Main {
-    final static double salarioBase = 2000.00;
+    static double salarioBase = 2000.00;
+    static int numeroDeVagas = 5;
+    static String  [] candidatos = {"FELIPE", "MARCIA","JULIA","PAULO","AUGUSTO", "MONICA","MIRELA","DANIELA","JORGE"};
 
     public static void main(String[] args) {
+        selecionarCandidatos(candidatos, numeroDeVagas);
+    }
 
 
-        analisarCandidato(1900.0);
-        analisarCandidato(2200.0);
-        analisarCandidato(2000.0);
+    static  void selecionarCandidatos(String [] candidatos, int numeroDeVagas){
+        int candidatosSelecionados = 0;
+        int candidatoAtual = 0;
+
+        while (candidatoAtual < candidatos.length){
+            String nomeCandidato = candidatos[candidatoAtual];
+            double salarioPretendido = valorPretendido();
+            System.out.println("O candidato "+ nomeCandidato + " solicitou um salário de " + salarioPretendido);
+
+            if(salarioBase >= salarioPretendido){
+                System.out.println("O Candidato " + nomeCandidato + " foi selecionado para a vaga");
+                candidatosSelecionados++;
+            }
+            candidatoAtual++;
+        }
+    }
+
+    static double valorPretendido(){
+        return ThreadLocalRandom.current().nextDouble(1800,2200);
     }
 
     static void analisarCandidato(double salarioPretendido){
